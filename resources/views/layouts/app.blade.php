@@ -23,31 +23,15 @@
 
 <body>
     <div id="app">
-        <nav class="row">
-            <div class="container">
-                <div class="col-md">
-                    <div class="card mt-4 static" style="z-index: 2">
-                        <div class="card-body bg-dark rounded shadow d-flex flex-row justify-content-between align-items-baseline">
-                            <div>
-                                <vs-button type="line">Nosotros</vs-button>
-                                <vs-button type="line">Nuestro Servicio</vs-button>
-                                <vs-button type="line">Nuestros Clientes</vs-button>
-                            </div>
-                            <img class="img-fluid" alt="Logo lavatu" src="https://via.placeholder.com/300x120?text=Lavatu" style="position:absolute; margin: -3% 33% 0 36%;" />
-                            <div>
-                                <vs-button type="line">Contactanos</vs-button>
-                                <vs-button type="line">Ubicanos</vs-button>
-                                <vs-button type="line">Solicita una hora</vs-button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <v-app>
+            @include('partials/nav')
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+            <main class="py-4">
+                @yield('content')
+            </main>
+
+            @include('partials/footer')
+        </v-app>
     </div>
 </body>
 
