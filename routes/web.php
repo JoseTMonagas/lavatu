@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['web']], function() {
+    Route::get('/inicio', 'HomeController@index')->name('home');
 
-Route::get('/reservar', 'ReservaController@index')->name('reserva');
+    Route::get('/reservar', 'ReservaController@index')->name('reserva');
+
+    Route::post('changelocale', 'ChangeLocale')->name('changeLocale');
+});
