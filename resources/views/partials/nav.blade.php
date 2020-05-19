@@ -1,50 +1,76 @@
-<nav class="row sticky-top">
-    <div class="container d-md-none">
-        <img class="img-fluid" alt="Logo lavatu" src="https://via.placeholder.com/300x120?text=Lavatu" style="position:absolute;margin-left:20%;margin-top: -3%; width: 10rem;z-index: 3" />
+<nav class="row container d-md-none sticky">
+    <div>
         <div class="col-md">
-            <div class="card mt-4 static">
-                <div class="card-body bg-dark rounded shadow d-flex flex-row justify-content-between align-items-baseline">
+            <div class="card border border-primary static">
+                <div class="card-body bg-info rounded shadow d-flex flex-row justify-content-between align-items-baseline">
                     <div class="text-center">
-                        <v-menu offset-y z-index="3">
+                        <v-menu offset-y>
                             <template v-slot:activator="{ on }">
                                 <v-btn color="primary" dark v-on="on">
-                                    Menu
+                                    <v-icon>
+                                        mdi-menu
+                                    </v-icon>
                                 </v-btn>
                             </template>
-                            <v-list>
+                            <v-list class="pt-5">
                                 <v-list-item>
-                                    <v-list-item-title><a href="#servicio">Nuestro Servicio</a></v-list-item-title>
+                                    <v-list-item-title><a href="#servicio">@lang("menu.servicio")</a></v-list-item-title>
                                 </v-list-item>
                                 <v-list-item>
-                                    <v-list-item-title><a href="#nosotros">Conocenos</a></v-list-item-title>
+                                    <v-list-item-title><a href="#nosotros">@lang("menu.conocenos")</a></v-list-item-title>
                                 </v-list-item>
                                 <v-list-item>
-                                    <v-list-item-title><a href="#contacto">Contactanos</a></v-list-item-title>
+                                    <v-list-item-title><a href="#contacto">@lang("menu.contactanos")</a></v-list-item-title>
+                                </v-list-item>
+                                <v-list-item>
+                                    <form method="POST" action="{{ route('changeLocale') }}">
+                                        @csrf
+                                        <input name="locale" type="hidden" value="es" />
+
+                                        <button class="btn" type="submit" style="margin-right: 4rem"><img src="{{ asset('img/esp.png') }}" alt="Bandera de España" /></button>
+                                    </form>
+
+                                    <form method="POST" action="{{ route('changeLocale') }}">
+                                        @csrf
+                                        <input name="locale" type="hidden" value="en" />
+
+                                        <button class="btn" type="submit" style="margin-left: 4rem"><img src="{{ asset('img/eng.png') }}" alt="Bandera de Estados Unidos" /></button>
+                                    </form>
                                 </v-list-item>
                             </v-list>
                         </v-menu>
                     </div>
                     <div>
-                        <v-btn class="ma-2" outlined color="primary">Solicita ya</v-btn>
+                        <v-btn outlined color="primary" href="{{ route('reserva') }}">@lang('menu.hora')</v-btn>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="container d-none d-md-block">
+</nav>
+<nav class="sticky-top d-none d-md-block">
+    <div class="container">
         <div class="col-md">
-            <div class="card mt-4 static" style="z-index: 2">
-                <div class="card-body bg-dark rounded shadow d-flex flex-row justify-content-between align-items-baseline">
-                    <div>
-                        <v-btn class="ma-2" href="#servicio" outlined color="white">Nuestro Servicio</v-btn>
-                        <v-btn class="ma-2" href="#nosotros" outlined color="white">Conocenos</v-btn>
-                    </div>
-                    <img class="img-fluid" alt="Logo lavatu" src="https://via.placeholder.com/300x120?text=Lavatu" style="position:absolute; margin: -3% 33% 0 36%;" />
-                    <div>
-                        <v-btn class="ma-2" href="#contacto" outlined color="white">Contactanos</v-btn>
-                        <v-btn class="ma-2" outlined color="primary">Solicita ya</v-btn>
-                    </div>
+            <div class="card static border border-primary" style="z-index: 2">
+                <div class="card-body bg-info rounded shadow d-flex flex-row justify-content-between align-items-baseline">
+                    <a class="btn btn-outline-primary" href="#servicio">@lang('menu.servicio')</a>
+                    <a class="btn btn-outline-primary" href="#nosotros">@lang('menu.conocenos')</a>
+                    <form method="POST" action="{{ route('changeLocale') }}">
+                        @csrf
+                        <input name="locale" type="hidden" value="es" />
+
+                        <button class="btn" type="submit" style="margin-right: 4rem"><img src="{{ asset('img/esp.png') }}" alt="Bandera de España" /></button>
+                    </form>
+                    <img class="img-fluid" alt="Logo lavatu" src="{{ asset('img/logo.png') }}" style="position:absolute; margin: -3% 33% 0 42%; width: 8rem" />
+
+                    <form method="POST" action="{{ route('changeLocale') }}">
+                        @csrf
+                        <input name="locale" type="hidden" value="en" />
+
+                        <button class="btn" type="submit" style="margin-left: 4rem"><img src="{{ asset('img/eng.png') }}" alt="Bandera de Estados Unidos" /></button>
+                    </form>
+                    <a class="btn btn-outline-primary" href="#contacto">@lang('menu.contactanos')</a>
+                    <a class="btn btn-primary" href="{{ route('reserva') }}">@lang('menu.hora')</a>
                 </div>
             </div>
         </div>

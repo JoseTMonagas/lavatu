@@ -5,7 +5,7 @@
         @include('partials/xs-home')
     </div>
 
-    <div class="container-fluid d-none d-block-md">
+    <div class="container-fluid d-none d-md-block">
         @include('partials/lg-home')
     </div>
 @endsection
