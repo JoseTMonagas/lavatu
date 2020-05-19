@@ -8,10 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import Vuesax from 'vuesax';
-import 'vuesax/dist/vuesax.css';
-
-import 'material-icons/iconfont/material-icons.css';
+import Vuetify from 'vuetify';
 
 /**
  * The following block of code may be used to automatically register your
@@ -24,8 +21,8 @@ import 'material-icons/iconfont/material-icons.css';
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.use(Vuesax);
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.use(Vuetify);
+Vue.component('reserva-hora', require('./components/ReservaHora.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,4 +32,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    vuetify: new Vuetify()
 });
