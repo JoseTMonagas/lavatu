@@ -23,6 +23,8 @@ import Vuetify from 'vuetify';
 
 Vue.use(Vuetify);
 Vue.component('reserva-hora', require('./components/ReservaHora.vue').default);
+Vue.component('img-dialog', require('./components/ImgDlg.vue').default);
+Vue.component('pop-up', require('./components/PopUp.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

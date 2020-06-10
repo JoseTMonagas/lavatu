@@ -25,10 +25,33 @@
                     <v-row justify="center">
                         <v-radio-group v-model="tipo" :mandatory="false">
                             <v-radio
-                                label="Lavado + Secado"
-                                value="completo"
+                                label="Lavado y Secado LavaTú"
+                                value="completo_lavatu"
                             ></v-radio>
-                            <v-radio label="Lavado" value="secado"></v-radio>
+                            <v-radio
+                                label="Servicio Encargo Lavado y Secado LavaTú"
+                                value="completo_encargo"
+                            ></v-radio>
+                            <v-radio
+                                label="Lavado LavaTú"
+                                value="lavado_lavatu"
+                            ></v-radio>
+                            <v-radio
+                                label="Servicio Encargo solo Lavado"
+                                value="lavado_encargo"
+                            ></v-radio>
+                            <v-radio
+                                label="Secado LavaTú"
+                                value="secado_lavatu"
+                            ></v-radio>
+                            <v-radio
+                                label="Servicio Encargo solo Secado LavaTú"
+                                value="secado_encargo"
+                            ></v-radio>
+                            <v-radio
+                                label="Lavado LavaTú"
+                                value="lavado_lavatu"
+                            ></v-radio>
                         </v-radio-group>
                     </v-row>
                     <v-row justify="center">
@@ -43,7 +66,7 @@
                         </v-col>
                     </v-row>
                     <v-card-actions class="d-flex justify-content-around">
-                        <v-btn text>Cancelar</v-btn>
+                        <v-btn @click="cancelar" text>Cancelar</v-btn>
 
                         <v-btn color="primary" @click="validarCiclo">
                             Continuar
@@ -76,7 +99,7 @@
                     </v-row>
 
                     <v-card-actions class="d-flex justify-content-around">
-                        <v-btn text>Cancelar</v-btn>
+                        <v-btn @click="cancelar" text>Cancelar</v-btn>
 
                         <v-btn color="primary" @click="disponibilidad">
                             Continuar
@@ -121,7 +144,8 @@
                                 <v-list-item>Fecha: {{ fecha }}</v-list-item>
                                 <v-list-item>Hora: {{ hora }}</v-list-item>
                                 <v-list-item
-                                    >Tipo de Ciclo: {{ tipo }}</v-list-item
+                                    >Tipo de Ciclo:
+                                    {{ tipoFormat }}</v-list-item
                                 >
                                 <v-list-item
                                     >Numero de Ciclos:
@@ -132,11 +156,19 @@
                     </v-col>
                 </v-row>
 
-                <v-btn color="primary" @click="reservar">
+                <v-btn
+                    :loading="loading"
+                    :disabled="loading"
+                    color="success"
+                    @click="reservar"
+                >
                     Reservar
+                    <template v-slot:loader>
+                        <span>Cargando...</span>
+                    </template>
                 </v-btn>
 
-                <v-btn text>Cancelar</v-btn>
+                <v-btn @click="cancelar" text>Cancelar</v-btn>
             </v-stepper-content>
         </v-stepper-items>
     </v-stepper>
@@ -157,6 +189,10 @@ export default {
         homeRoute: {
             type: String,
             default: "",
+        },
+        email: {
+            type: String,
+            default: ""
         }
     },
     data() {
@@ -167,12 +203,18 @@ export default {
             tipo: 'completo',
             cantidad: 1,
             disponible: false,
+            loading: false
         };
     },
     computed: {
         now() {
             return new Date().toISOString();
         },
+        tipoFormat() {
+            let new_str = this.tipo.replace('_', ' ')
+            let cap_str = new_str.charAt(0).toUpperCase() + new_str.slice(1)
+            return cap_str
+        }
     },
     methods: {
         getDate() {
@@ -184,6 +226,9 @@ export default {
             } else {
                 this.e1 = 2;
             }
+        },
+        cancelar() {
+            window.location = this.homeRoute
         },
         disponibilidad() {
             const datetime = this.getDate();
@@ -204,24 +249,35 @@ export default {
             const hora = this.getDate();
             const tipo_carga = this.tipo;
             const carga = this.cantidad;
+            const email = this.email;
+            const redireccion = () => {
+                window.location = this.homeRoute;
+            }
 
+            this.loading = true
             axios
-                .post(this.reservaRoute, { hora, carga, tipo_carga })
+                .post(this.reservaRoute, { hora, carga, tipo_carga, email })
                 .then((resp) => {
                     if (resp.data.id > 0) {
                         Swal.fire({
                             title: 'Reserva lista',
                             icon: 'success',
-                            text: 'Reserva realizada correctamente'
+                            text: 'Reserva realizada correctamente, sera redireccionado al inicio.',
+                            timer: 5000,
+                            timerProgressBar: true,
+                            onClose:  redireccion
                         });
-                        window.location = this.homeRoute;
+                        this.loading = false
                     } else {
                         Swal.fire({
                             title: 'Error',
                             icon: 'error',
-                            text: 'No se pudo realizar la reserva, pruebe nuevamente mas tarde'
+                            text: 'No se pudo realizar la reserva, pruebe nuevamente mas tarde, sera redireccionado al inicio.',
+                            timer: 5000,
+                            timerProgressBar: true,
+                            onClose:  redireccion
                         });
-                        window.location = this.homeRoute;
+                        this.loading = false
                     }
                 });
         },

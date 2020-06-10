@@ -2,10 +2,10 @@
 # ¡Tu Reserva fue realizada exitosamente!
 
 @component('mail::panel')
-    {{ $datetime }}
+    {{ $hora }}
 @endcomponent
 
-<img alt="Reglamentos de Uso" src="{{ asset('img/5') }}"/>
+<img alt="Reglamentos de Uso" src="{{ asset('img/5.jpg') }}"/>
 
 Muchas Gracias desde,<br>
 {{ config('app.name') }}

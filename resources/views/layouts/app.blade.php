@@ -11,6 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -47,13 +48,28 @@
         <v-app>
             @include('partials/nav')
 
-            <main class="py-4">
+            <main class="py-4 body-bg">
                 @yield('content')
             </main>
+
+            @if(session('status'))
+                <pop-up
+                    title="{{ session('status')['title'] }}"
+                    text="{{ session('status')['text'] }}"
+                    @if(array_key_exists('action', session('status')))
+                    action-route="{{ session('status') }}"
+                    @endif
+                ></pop-up>
+            @endif
 
             @include('partials/footer')
         </v-app>
     </div>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("suscription-form").submit();
+        }
+    </script>
 </body>
 
 </html>

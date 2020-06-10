@@ -26,7 +26,8 @@ class ReservaForm extends FormRequest
         return [
             'hora' => 'required',
             'carga' => 'required|integer',
-            'tipo_carga' => 'required|in:completo,secado'
+            'tipo_carga' => 'required',
+            'email' => 'required'
         ];
     }
 }

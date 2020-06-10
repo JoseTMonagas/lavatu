@@ -1,35 +1,18 @@
 <?php
 
 return [
-    'lavado' => 'Tú mismo puedes lavar y secar tu ropa en nuestras máquinas.<br> 1 canasto = 1 carga = 1 ficha.',
-    'secado' => 'En Lavatú puedes secar la ropa que lavaste en tu casa.<br> 1 canasto = 1 carga = 1 ficha',
-    'encargo' => 'En LavaTú nos podemos ocupar de tu ropa.
-Si no tienes tiempo, nosotros recibimos tu ropa, la lavamos y secamos por ti y te la entregamos a tu regreso.',
-    'cerca' => 'Nuestro objetivo es brindarte el mejor servicio en tu localidad, ven a buscarnos en Gamboa 594, Castro.',
-    'conoce' => 'Es tan sencillo como llegar, disponer tu ropa en la lavadora, volver 30 minutos mas tarde y moverlo a una secadora y en 60 minutos tu ropa estara seca. Tu ropa limpia y seca en solo hora y media.',
-    'quienes' => 'Antes de introducir por primera vez una prenda dentro del agua (fría o caliente), asegúrate que sea lo indicado para ella.
-Revisa las etiquetas con las recomendaciones de fábrica. Te indicarán lo que puedes hacer con tu ropa para mantenerla en buenas condiciones por más tiempo.
-<br>
-<b>ANTES DE LAVAR</b>
-<br>
-Vacía los bolsillos
-<br>
-Desabrocha botones
-<br>
-Repara prendas descosidas o rotas
-<br>
-Sube los cierres eclair y cierres velcro
-<br>
-Asegúrate que tu ropa esté al revés antes de introducirla a la lavadora
-<br>
-Retira cinturones no lavables y todo tipo de adorno que se pueda quitar
-<br>
-Separa ropa de color blanco de ropa de colores claros y colores oscuros
-<br>
-Las prendas muy sucias deben lavarse por separado
-<br>
-Levanta los cuellos de las camisas y blusas antes de lavar
-<br>
-Lava por separado los tejidos abiertos (chalecos) y telas delicadas que pierden pelusas (toallas y algunos polerones)',
-    'esperas' => 'El horario de atencion es de lunes a viernes, desdes las 8:30 hasta las 19:30, y los sabados desde las 9:00 hasta las 16:00'
+    'banner-1' => 'Desde ahora, lavar y secar tu ropa será mucho más rapido. Ya sea para el trabajo, la oficina o el dia a dia. LavaTú te ofrece un exclusivo autoservicio de lavado que te permitira lavar y secar tu ropa en menos de 2 horas.',
+    'banner-2' => 'En LavaTú podrás lavar de manera fácil, conveniente y mas rápido para poder disfrutar de todo lo que te gusta.',
+    'lavado' => 'Tu mismo puedes lavar y secar tu ropa en nuestras maquinas ',
+    'secado' => 'En LavaTú puedes secar tu ropa que lavaste en tu casa ',
+    'encargo' => 'Si no tienes tiempo, recibimos tu ropa, la lavamos y secamos por ti',
+    'reserva' => 'Gana tiempo y evita esperas, haz la reserva aqui',
+    'badge' => '1 canasto = 1 carga = 1 ficha',
+    '1' => 'Lava tu ropa y llévatela limpia en menos de 2 horas.',
+    '2' => 'No más ropa tendida por dias',
+    '3' => 'A sólo dos cuadras de la Plaza de Armas de Castro',
+    '4' => 'Nadie cuida tus prendas como tú. Lávala como a ti te gusta',
+    '5' => 'Lava por volumen y si quieres, usa tu propio detergente.',
+    '6' => 'Contáctanos para conocer nuestras ofertas y servicios.',
+    'direccion-2' => 'Horario de atención: <br/> Lunes a viernes de 8:30 a 20:00 h, <br/> Sábado de 9:00 a 16:30 h.',
 ];

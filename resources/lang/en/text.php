@@ -1,12 +1,18 @@
 <?php
 
 return [
-    'lavado' => 'You can wash and dry your clothes with our equipment! <br>1 basket = 1 load = 1 coin.',
-    'secado' => 'With us, you can dry the clothes you washed at home! <br>1 basket = 1 load = 1 coin.',
-    'encargo' => "In LavaTú we can take care of your clothes. If you don't have the time, we will receive your clothes, wash it, and dry it for you! We will deliver it to you when you come back.",
-    'cerca' => 'Our objective is giving you the best service, near you, you can find us in Gamboa 594, Castro.',
-    'conoce' => "It's as easy as getting there putting your clothes in the washing machine, come back 30 minutes later to put it in the dryer and finally come back an hour later to pick up your clothes, now clean and dry, in just an hour and half.",
-    'quienes' => 'Our services is centered around time and quality, traditional laundries take your clothes, classify it, and return it to you between 48 to 72 hours later.
-But with LavaTú self-service, you arrive, put your clothes in our equipment and in just an hour and half it will be completly clean and dry, ready for you to come pick it back up.',
-    'esperas' => 'Our opening hours are from monday to friday between 8:30 to 19:30, and saturdays between 9:00 and 16:00.'
+    'banner-1' => 'From now on, washing and drying your clothes will be much faster. Be it for your work, office, or day-to-day. U-Wash offers your an exclusive laundary self-service that allows you to wash and dry your clothes in less than 2 hours.',
+    'banner-2' => 'With U-Wash, washing your clothes has never been easier, convenient and faster, so you can enjoy everything else that you like doing.',
+    'lavado' => 'You can wash and dry your own clothes in our equipment.',
+    'secado' => 'With U-Wash you can dry your clothes that you wash at home.',
+    'encargo' => 'If you don\'t have time, just leave your clothes with us and we can wash and dry them for you.',
+    'reserva' => 'Gana tiempo y evita esperas, haz la reserva aqui',
+    'badge' => '1 basket = 1 load = 1 coin',
+    '1' => 'Wash your clothes and take them clean in less than 2 hours.',
+    '2' => 'No more clothes lying around for days.',
+    '3' => 'Just 2 blocks away from the "Plaza de Armas" of Castro.',
+    '4' => 'Noone takes care of your clothes better than you. Wash it however you like.',
+    '5' => 'Wash by volume and if you want, use your own detergent.',
+    '6' => 'Contact us to know more about our offers and services.',
+    'direccion-2' => 'Attention Hours: Monday to Friday from 8:30 am to 8:00 pm; Saturdays from 9:00 am to 4:30 pm.',
 ];
