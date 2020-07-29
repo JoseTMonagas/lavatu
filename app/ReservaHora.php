@@ -13,4 +13,9 @@ class ReservaHora extends Model
     {
         $this->attributes['hora'] = Carbon::createFromFormat('Y-m-d H:i', $value);
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

@@ -1,5 +1,22 @@
 <div class="container-fluid">
 
+    <!-- Banner -->
+    <div class="row jumbotron shadow">
+        <div class="col-md-2">
+            <span class="badge badge-success shadow w-100 display-1">-30%</span>
+        </div>
+        <div class="col-md">
+            <h1>Promoción por inauguración.</h1>
+            <p>
+                Acercate a nuestro local y recibe un 30% de descuento en todos nuestros servicios. <br />
+                Promoción válida por 20 días a partir del 17 de junio del 2020.</p>
+        </div>
+        <div class="col-md-2 d-flex justify-content-center">
+            <img class="img-fluid" style="width: 6rem" src="{{ asset('img/logo.png') }}"/>
+        </div>
+    </div>
+    <!-- End Banner -->
+
     <div class="row bg-primary mb-5">
         <div class="col-xs-12">
             <div class="row banner-top p-3 p-md-5 banner-height">

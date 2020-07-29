@@ -32,9 +32,9 @@ class ReservaController extends Controller
 
     public function create(ReservaForm $request)
     {
-        $reserva = ReservaHora::create($request->validated());
         $email = $request->validated()['email'];
         $user = \App\User::where('email', $email)->first();
+        $reserva = $user->reservas()->create($request->validated());
 
         try {
             Mail::to($email)->send(new ReservaRealizada($reserva->hora));

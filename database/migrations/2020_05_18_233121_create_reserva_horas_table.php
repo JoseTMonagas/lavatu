@@ -20,6 +20,8 @@ class CreateReservaHorasTable extends Migration
             $table->unsignedInteger('carga');
             $table->string('tipo_carga');
 
+            $table->foreignId('user_id')->constrained();
+
             $table->timestamps();
         });
     }
