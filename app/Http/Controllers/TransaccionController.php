@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\OrdenTrabajo;
 use App\Transaccion;
 use Illuminate\Http\Request;
 use \Transbank\Webpay\Configuration;
@@ -14,9 +15,17 @@ class TransaccionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function init(Request $request)
+    public function init(OrdenTrabajo $ordenTrabajo)
     {
         $transaction = null;
+
+        $transactionData = [
+            "monto" = $ordenTrabajo->total,
+            "sessionId" = session()->getId(),
+            "buyOrder" = $ordenTrabajo->id,
+            "returnUrl" = route('webpay.voucher'),
+            "finalUrl" = route('webpay.finish'),
+        ];
 
         if (App::enviroment("local")) {
             $transaction = (new Webpay(Configuration::forTestingWebpayPlusNormal()))
@@ -31,13 +40,14 @@ class TransaccionController extends Controller
             $transaction = new Webpay($configuration);
         }
 
-        if ($transaction != null) {
-            $monto = 0;
-            $sessionId = 0;
-            $buyOrder = 0;
-            $returnUrl = "";
-            $finalUrl = "";
-            $initResult = $transaction->initTransaction($amount, $buyOrder, $sessionId, $returnUrl, $finalUrl);
+        if ($transaction != null && in_array(null, $transactionData, true)) {
+            $initResult = $transaction->initTransaction(
+                $transactionData["monto"],
+                $transactionData["buyOrder"],
+                $transactionData["sessionId"],
+                $transactionData["returnUrl"],
+                $transactionData["finalUrl"],
+            );
 
             $formAction = $initResult->url;
             $tokenWs = $initResult->token;

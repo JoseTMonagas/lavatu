@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container-fluid">
         <div class="col-md-6 mx-auto">
@@ -9,7 +8,7 @@
                     <strong>Condiciones del Servicio, Precio y Recomendaciones</strong>
                 </v-card-text>
                 <v-card-text>
-                    Valor de lavado-secado de una carga de ropa: <b>$9.000. (nueve mil pesos)</b>
+                    Valor de lavado-secado de una carga de ropa: <b>$8.700. (ocho mil, setecientos pesos)</b>
                 </v-card-text>
                 <v-card-text>La cobertura de nuestro servicio de Retiro y Entrega a domicilio es gratuito para la denominada zona urbana de Castro. Para servicios fuera de la zona urbana de Castro, contáctenos (llamado o WhatsApp) al <b>+56 9 5699 3082</b> o bien al correo <a href="mailto:contacto@lavatu.cl">contacto@lavatu.cl</a></v-card-text>
                 <v-card-text>Actualmente no prestamos el servicio de lavado y secado de plumones, cobertores, frazadas, cortinas, almohadas, zapatillas, mochilas  y otras piezas de tamaño mayor.</v-card-text>

@@ -15,6 +15,8 @@ class CreateOrdenTrabajosTable extends Migration
     {
         Schema::create('orden_trabajos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

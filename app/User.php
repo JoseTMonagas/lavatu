@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\ReservaHora');
     }
+
+    public function ordenes()
+    {
+        return $this->hasMany('App\OrdenTrabajo');
+    }
 }

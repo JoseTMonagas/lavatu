@@ -9,7 +9,7 @@
                     <strong>Terms of Service, Price and Recommendations</strong>
                 </v-card-text>
                 <v-card-text>
-                    Washing-drying value of a load of clothes: <b>$9.000. (nine thousand pesos)</b>
+                    Washing-drying value of a load of clothes: <b>$8.700. (eight thousand, seven hundred pesos)</b>
                 </v-card-text>
                 <v-card-text>The coverage of our Retirement and Home Delivery service is free for the so-called urban area of ​​Castro. For services outside the urban area of ​​Castro, contact us (called or WhatsApp) at <b>+56 9 5699 3082</b> or at <a href="mailto:contacto@lavatu.cl">contacto@lavatu.cl</a></v-card-text>
                 <v-card-text>Currently we do not provide the service of washing and drying down, covers, blankets, curtains, pillows, slippers, backpacks and other larger pieces.</v-card-text>
