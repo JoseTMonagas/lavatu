@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Ropa;
 
 class RopaSeeder extends Seeder
 {
@@ -11,13 +12,15 @@ class RopaSeeder extends Seeder
      */
     public function run()
     {
-        $categoria = \App\Category::where('name', "Prenda Superior")->first();
-        $categoria->ropas()->create(["name" => "Camisa", "img" => asset("img/ICONOS_ROPA/ICONOS_WEB-27.png")]);
-        $categoria->ropas()->create(["name" => "Poleron", "img" => asset("img/ICONOS_ROPA/ICONOS_WEB-33.png")]);
+        $csv = array_map('str_getcsv', file(database_path("imports/Prendas.csv")));
+        array_walk($csv, function (&$a) use ($csv) {
+            $a = array_combine($csv[0], $a);
+        });
+        array_shift($csv);
 
-
-        $categoria = \App\Category::where('name', "Prenda Inferior")->first();
-        $categoria->ropas()->create(["name" => "Bermudas", "img" => asset("img/ICONOS_ROPA/ICONOS_WEB-06.png")]);
-        $categoria->ropas()->create(["name" => "Jeans", "img" => asset("img/ICONOS_ROPA/ICONOS_WEB-11.png")]);
+        foreach ($csv as $row) {
+            $row["img"] = ("img/ICONOS_ROPA/" . $row["name"] . ".png");
+            Ropa::create($row);
+        }
     }
 }

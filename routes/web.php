@@ -31,21 +31,25 @@ Route::group(['middleware' => ['web']], function() {
         "ropas" => "RopaController",
     ]);
 
+    Route::get('ot/index', 'OrdenTrabajoController@index')->name('ot.index');
+    Route::get('ot/list', 'OrdenTrabajoController@list')->name('ot.getOT');
+    Route::post('ot/state', 'OrdenTrabajoController@updateState')->name('ot.stateUpdate');
+
     Route::get('condiciones/es', 'CondicionController@viewEs');
     Route::get('condiciones/en', 'CondicionController@viewEn');
 
-    Route::get('pedidos', 'CrearOTController')->name('crear-ot');
+    Route::get('pedidos', 'CrearOTController')->middleware('auth')->name('crear-ot');
     Route::post('pedidos', 'GuardarOTController')->name('guardar-ot');
 
     Route::group(["prefix" => "webpay"], function() {
-        Route::post('init/{ordenTrabajo}', 'WebpayController@init')->name('webpay.init');
-        Route::get('token', 'WebpayController@token')->name('webpay.token');
+        Route::get('init/{ordenTrabajo}', 'TransaccionController@init')->name('webpay.init');
+        Route::get('token', 'TransaccionController@token')->name('webpay.token');
 
-        Route::get('exito', 'WebpayController@exito')->name('webpay.exito');
-        Route::get('rechazo', 'WebpayController@rechazo')->name('webpay.rechazo');
+        Route::get('exito', 'TransaccionController@exito')->name('webpay.exito');
+        Route::get('rechazo', 'TransaccionController@rechazo')->name('webpay.rechazo');
 
-        Route::post('voucher', 'WebpayController@voucher')->name('webpay.voucher');
-        Route::post('finish', 'WebpayController@finish')->name('webpay.finish');
+        Route::post('voucher/{ordenTrabajo}', 'TransaccionController@voucher')->name('webpay.voucher');
+        Route::post('finish/{ordenTrabajo}', 'TransaccionController@finish')->name('webpay.finish');
 
     });
 

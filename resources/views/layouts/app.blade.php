@@ -11,7 +11,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -65,11 +64,6 @@
             @include('partials/footer')
         </v-app>
     </div>
-    <script>
-        function onSubmit(token) {
-            document.getElementById("suscription-form").submit();
-        }
-    </script>
 </body>
 
 </html>

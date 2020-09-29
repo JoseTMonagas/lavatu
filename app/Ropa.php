@@ -23,6 +23,16 @@ class Ropa extends Model
         return route('ropas.destroy', $this->id);
     }
 
+    public function getNameAttribute(String $value)
+    {
+        return ucfirst(strtolower(str_replace("_", " ", $value)));
+    }
+
+    public function getImgAttribute(String $value)
+    {
+        return asset($value);
+    }
+
     public function category()
     {
         return $this->belongsTo('App\Category');

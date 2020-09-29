@@ -23,6 +23,11 @@ class Category extends Model
         return route('categories.destroy', $this->id);
     }
 
+    public function getNameAttribute(String $value)
+    {
+        return ucfirst(strtolower(str_replace("_", " ", $value)));
+    }
+
     public function ropas()
     {
         return $this->hasMany('App\Ropa');

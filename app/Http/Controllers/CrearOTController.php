@@ -14,9 +14,10 @@ class CrearOTController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $user = \Auth::user();
         $items = \App\Category::all();
         $items->load('ropas');
 
-        return view('generar_ot')->with(compact('items'));
+        return view('generar_ot')->with(compact('items', 'user'));
     }
 }

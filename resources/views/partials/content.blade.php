@@ -1,21 +1,58 @@
 <div class="container-fluid">
 
-    <!-- Banner -->
-    <div class="row jumbotron shadow">
-        <div class="col-md-2">
-            <span class="badge badge-success shadow w-100 display-1">-30%</span>
+    <!-- Banner
+         <div class="row jumbotron shadow">
+         <div class="col-md-2">
+         <span class="badge badge-success shadow w-100 display-1">-30%</span>
+         </div>
+         <div class="col-md">
+         <h1>Promoción por inauguración.</h1>
+         <p>
+         Acercate a nuestro local y recibe un 30% de descuento en todos nuestros servicios. <br />
+         Promoción válida por 20 días a partir del 17 de junio del 2020.</p>
+         </div>
+         <div class="col-md-2 d-flex justify-content-center">
+         <img class="img-fluid" style="width: 6rem" src="{{ asset('img/logo.png') }}"/>
+         </div>
+         </div>
+         End Banner -->
+
+    <div class="row">
+        <div class="col-md-4">
+            <img
+                src="{{ asset('img/Lavanderia-LavaTu_RRSS_junio (4).jpg') }}"
+                alt=""
+                class="img-fluid"
+            />
         </div>
-        <div class="col-md">
-            <h1>Promoción por inauguración.</h1>
-            <p>
-                Acercate a nuestro local y recibe un 30% de descuento en todos nuestros servicios. <br />
-                Promoción válida por 20 días a partir del 17 de junio del 2020.</p>
+        <div class="col-md-4">
+            <img src="{{ asset('img/promo_2x1.jpg') }}" class="img-fluid">
         </div>
-        <div class="col-md-2 d-flex justify-content-center">
-            <img class="img-fluid" style="width: 6rem" src="{{ asset('img/logo.png') }}"/>
+        <div class="col-md-4">
+            <img src="{{ asset('img/promo_cumple.jpg') }}" class="img-fluid">
         </div>
     </div>
-    <!-- End Banner -->
+
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+
+            <v-card class="p-5">
+                <div class="d-flex flex-row justify-content-around">
+                    <video controls>
+                        <source src="{{ asset('img/VIDEOS/PASOS.mp4')}}" type='video/mp4'>
+                        <source src="{{ asset('img/VIDEOS/PASOS.webm') }}" type='video/webm'>
+                        Tu navegador no soporta videos HTML5.
+                    </video>
+                    <div class="d-flex flex-column justify-content-center">
+                        <strong class="display-3 mb-5">¿Listo para empezar?</strong>
+                        <a class="btn btn-outline-success btn-block mt-5" href="{{ route('crear-ot') }}">Ingresa aquí</a>
+                    </div>
+                </div>
+            </v-card>
+
+        </div>
+
+    </div>
 
     <div class="row bg-primary mb-5">
         <div class="col-xs-12">

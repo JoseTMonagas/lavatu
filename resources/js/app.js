@@ -27,6 +27,7 @@ Vue.component('img-dialog', require('./components/ImgDlg.vue').default);
 Vue.component('pop-up', require('./components/PopUp.vue').default);
 Vue.component('base-table', require('./components/BaseTable.vue').default);
 Vue.component('orden-trabajo', require('./components/OrdenTrabajo.vue').default);
+Vue.component('control-ot', require('./components/ControlOT.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -62,7 +62,7 @@ class OrdenTrabajo extends Model
 
     public function agregarCargas(Array $cargas)
     {
-        foreach($cargas as $carga) {
+        foreach($cargas["carga"] as $carga) {
             $this->cargas()->attach($carga["id"], ["cantidad" => $carga["cantidad"], "planchar" => $carga["planchar"]]);
         }
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Http\Requests\OrdenForm;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,9 @@ class GuardarOTController extends Controller
      */
     public function __invoke(OrdenForm $request)
     {
-        $orden = \Auth::user()->ordenes()->create();
+        $form = $request->validated();
+        $user = User::find($request["user_id"]);
+        $orden = $user->ordenes()->create();
         $orden->agregarCargas($request->validated());
 
         $status = [
