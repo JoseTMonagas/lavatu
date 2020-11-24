@@ -16,7 +16,7 @@
                     <a class="btn btn-outline-info">
                         <i class="fab fa-whatsapp" style="font-size: 2rem"></i>
                     </a>
-                    +56 9 4055 8640
+                    +56 9 5699 3082
                 </span>
 
                 <span class="my-1 text-light">

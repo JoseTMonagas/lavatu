@@ -121,11 +121,13 @@ class TransaccionController extends Controller
 
         $result = json_decode($ordenTrabajo->result, true);
 
-        if ($result["responseCode"] == 0) {
-            return view('control/webpay/exito')->with(compact('result', 'ordenTrabajo'));
-        } else {
-            return view('control/webpay/rechazo')->with(compact('result', 'ordenTrabajo'));
+        if (isset($result)) {
+            if ($result["responseCode"] == 0) {
+                return view('control/webpay/exito')->with(compact('result', 'ordenTrabajo'));
+            }  
         }
+
+            return view('control/webpay/rechazo')->with(compact('result', 'ordenTrabajo'));
 
 
     }

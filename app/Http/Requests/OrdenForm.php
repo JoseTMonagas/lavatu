@@ -25,6 +25,7 @@ class OrdenForm extends FormRequest
     {
         return [
             'user_id' => 'required|exists:users,id',
+            'cargas' => 'required|integer|min:1',
             'carga' => 'required|array|min:1',
             'carga.*.cantidad' => 'required|integer',
             'carga.*.id' => 'required|integer',

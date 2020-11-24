@@ -82,6 +82,31 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="comuna" class="col-md-4 col-form-label text-md-right">{{ __('Comuna') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="comuna" class="form-control @error("comuna") is-invalid @enderror">
+                                    <option value="ancud">Ancud</option>
+                                    <option value="casto">Casto</option>
+                                    <option value="chonchi">Chonchi</option>
+                                    <option value="curaco de velez">Curaco de Vélez</option>
+                                    <option value="dalcahue">Dalcahue</option>
+                                    <option value="puqueldon">Puqueldón</option>
+                                    <option value="quelen">Quelen</option>
+                                    <option value="quellon">Quellón</option>
+                                    <option value="quemchi">Quemchi</option>
+                                    <option value="quinchao">Quinchao</option>
+                                </select>
+
+                                @error('comuna')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="sector" class="col-md-4 col-form-label text-md-right">{{ __('Sector') }}</label>
 
                             <div class="col-md-6">

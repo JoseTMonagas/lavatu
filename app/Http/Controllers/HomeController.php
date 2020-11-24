@@ -22,6 +22,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $promociones = \App\Promocion::getPromocionesDia();
+        return view('home')->with(compact('promociones'));
     }
 }

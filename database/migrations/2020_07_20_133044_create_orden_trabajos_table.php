@@ -18,6 +18,7 @@ class CreateOrdenTrabajosTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->json("result")->nullable();
             $table->string("state")->default("Nueva");
+            $table->integer("cargas");
             $table->softDeletes();
             $table->timestamps();
         });

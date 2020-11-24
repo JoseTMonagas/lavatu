@@ -4,11 +4,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require("./bootstrap");
 
-window.Vue = require('vue');
+window.Vue = require("vue");
 
-import Vuetify from 'vuetify';
+import Vuetify from "vuetify";
 
 /**
  * The following block of code may be used to automatically register your
@@ -22,12 +22,16 @@ import Vuetify from 'vuetify';
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.use(Vuetify);
-Vue.component('reserva-hora', require('./components/ReservaHora.vue').default);
-Vue.component('img-dialog', require('./components/ImgDlg.vue').default);
-Vue.component('pop-up', require('./components/PopUp.vue').default);
-Vue.component('base-table', require('./components/BaseTable.vue').default);
-Vue.component('orden-trabajo', require('./components/OrdenTrabajo.vue').default);
-Vue.component('control-ot', require('./components/ControlOT.vue').default);
+Vue.component("reserva-hora", require("./components/ReservaHora.vue").default);
+Vue.component("img-dialog", require("./components/ImgDlg.vue").default);
+Vue.component("pop-up", require("./components/PopUp.vue").default);
+Vue.component("base-table", require("./components/BaseTable.vue").default);
+Vue.component(
+  "orden-trabajo",
+  require("./components/OrdenTrabajo.vue").default
+);
+Vue.component("control-ot", require("./components/ControlOT.vue").default);
+Vue.component("modulo-venta", require("./components/ModuloVenta.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -36,6 +40,6 @@ Vue.component('control-ot', require('./components/ControlOT.vue').default);
  */
 
 const app = new Vue({
-    el: '#app',
-    vuetify: new Vuetify()
+  el: "#app",
+  vuetify: new Vuetify()
 });

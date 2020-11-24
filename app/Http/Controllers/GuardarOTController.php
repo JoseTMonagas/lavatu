@@ -18,8 +18,10 @@ class GuardarOTController extends Controller
     {
         $form = $request->validated();
         $user = User::find($request["user_id"]);
-        $orden = $user->ordenes()->create();
-        $orden->agregarCargas($request->validated());
+        $orden = $user->ordenes()->create([
+            "cargas" => $form["cargas"],
+        ]);
+        $orden->agregarRopas($request->validated());
 
         $status = [
             "status" => "OK",

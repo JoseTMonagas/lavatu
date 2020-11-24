@@ -7,7 +7,7 @@
         </div>
         <div class="col-xs-1">
             <div class="ml-md-2 d-flex flex-column">
-                <h4 class="text-info">+56 9 4055 8640</h4>
+                <h4 class="text-info">+56 9 5699 3082</h4>
             </div>
 
             <div class="d-flex flex-row">
@@ -15,7 +15,7 @@
                     @csrf
                     <input name="locale" type="hidden" value="es" />
 
-                    <button class="btn" type="submit"><img src="{{ asset('img/esp.png') }}" alt="Bandera de España" /></button>
+                    <button class="btn" type="submit"><img src="{{ asset('img/esp.png') }}" alt="Bandera de Espa単a" /></button>
                 </form>
 
                 <form method="POST" action="{{ route('changeLocale') }}">
@@ -38,4 +38,3 @@
             </a>
         </div>
     </nav>
-</header>

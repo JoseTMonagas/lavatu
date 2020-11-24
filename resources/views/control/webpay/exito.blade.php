@@ -3,9 +3,10 @@
 @section('content')
     <div class="col-md-6 mx-auto">
         <v-card>
-            <v-card-title>
-                Orden de Trabajo
-            </v-card-title>
+                <v-card-title class="d-flex flex-row justify-content-between">
+                    Orden de Trabajo
+                    <a class="" href="{{ route('home')  }}">Volver</a>
+                </v-card-title>
             <v-card-text>
                 <span class="mr-2"><b>Nº Orden: </b>{{ $result["buyOrder"]  }}</span>
                 <span><b>Fecha: </b>{{ $ordenTrabajo->created_at  }}</span>

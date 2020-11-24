@@ -8,36 +8,37 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class OrdenTrabajo extends Model
 {
     use SoftDeletes;
+    protected $fillable = ["cargas"];
 
     public function user()
     {
         return $this->belongsTo('App\User');
     }
 
-    public function cargas()
+    public function ropas()
     {
         return $this->belongsToMany('App\Ropa')->withPivot(["cantidad"]);
     }
 
     public function getSubtotalPlanchadoAttribute()
     {
-        $planchado = $this->cargas->filter(function($carga, $index) {
-            return $carga->pivot->planchado;
+        $planchado = $this->ropas->filter(function($ropa, $index) {
+            return $ropa->pivot->planchado;
         });
 
         $subtotal = 0;
 
-        foreach($planchado as $carga) {
+        foreach($planchado as $ropa) {
             $precio = 0;
-            if ($carga->precio_planchado > 0) {
-                $precio = $carga->precio_planchado;
-            } else if ($carga->pivot->cantidad < 5) {
+            if ($ropa->precio_planchado > 0) {
+                $precio = $ropa->precio_planchado;
+            } else if ($ropa->pivot->cantidad < 5) {
                 $precio = 700;
             } else {
                 $precio = 500;
             }
 
-            $subtotal += $carga->cantidad * $precio;
+            $subtotal += $ropa->cantidad * $precio;
         }
 
         return $subtotal;
@@ -46,7 +47,7 @@ class OrdenTrabajo extends Model
 
     public function getSubtotalCargasAttribute()
     {
-        return $this->cargas->count() * env('APP_PRECIO_CARGAS', 8500);
+        return $this->cargas * env('APP_PRECIO_ROPAS', 8700);
     }
 
     public function getSubtotalDespachoAttribute()
@@ -54,16 +55,31 @@ class OrdenTrabajo extends Model
         return 0;
     }
 
+    public function getSubtotalAdicionalAttribute()
+    {
+        if ($this->ropas->count() > 0) {
+            return $this->ropas->reduce(function ($acc, $ropa) {
+                $price = isset($ropa->price) ? $ropa->price : 0;
+                return $acc + $price;
+            });
+        }
+
+        return 0;
+    }
+
     public function getTotalAttribute()
     {
 
-        return $this->subtotalCargas + $this->subtotalPlanchado + $this->subtotalDespacho;
+        return $this->subtotalCargas
+            + $this->subtotalPlanchado
+            + $this->subtotalDespacho
+            + $this->subtotalAdicional;
     }
 
-    public function agregarCargas(Array $cargas)
+    public function agregarRopas(Array $ropas)
     {
-        foreach($cargas["carga"] as $carga) {
-            $this->cargas()->attach($carga["id"], ["cantidad" => $carga["cantidad"], "planchar" => $carga["planchar"]]);
+        foreach($ropas["carga"] as $ropa) {
+            $this->ropas()->attach($ropa["id"], ["cantidad" => $ropa["cantidad"], "planchar" => $ropa["planchar"]]);
         }
     }
 }

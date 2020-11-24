@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::group(['middleware' => ['web']], function() {
+Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::get('/reservar', 'ReservaController@index')->middleware('auth')->name('reserva');
@@ -23,17 +23,35 @@ Route::group(['middleware' => ['web']], function() {
     Route::post('changelocale', 'ChangeLocale')->name('changeLocale');
 
     Route::resource('suscriptores', 'SuscriptorController')->only([
-       'store'
+        'store'
     ]);
+    Route::post("ventas/export", "VentaController@export")
+        ->name("ventas.export");
 
-    Route::resources([
-        "categories" => "CategoryController",
-        "ropas" => "RopaController",
-    ]);
+    Route::group([
+        'middleware' => ['auth', 'isAllowed'],
+        'prefix' => 'mantenimiento',
+    ], function () {
+        Route::get('/', 'MantenimientoHomeController')
+            ->name('mantenimiento.home');
+        Route::resources([
+            "categories" => "CategoryController",
+            "clientes" => "ClienteController",
+            "ropas" => "RopaController",
+            "forma-pagos" => "FormaPagoController",
+            "tipo-servicios" => "TipoServicioController",
+            "promocions" => "PromocionController",
+            "precios" => "PrecioController",
+            "ventas" => "VentaController",
+        ]);
 
-    Route::get('ot/index', 'OrdenTrabajoController@index')->name('ot.index');
-    Route::get('ot/list', 'OrdenTrabajoController@list')->name('ot.getOT');
-    Route::post('ot/state', 'OrdenTrabajoController@updateState')->name('ot.stateUpdate');
+        Route::get('ot/index', 'OrdenTrabajoController@index')->name('ot.index');
+        Route::get('ot/list', 'OrdenTrabajoController@list')->name('ot.getOT');
+        Route::post('ot/state', 'OrdenTrabajoController@updateState')->name('ot.stateUpdate');
+    });
+
+
+
 
     Route::get('condiciones/es', 'CondicionController@viewEs');
     Route::get('condiciones/en', 'CondicionController@viewEn');
@@ -41,7 +59,7 @@ Route::group(['middleware' => ['web']], function() {
     Route::get('pedidos', 'CrearOTController')->middleware('auth')->name('crear-ot');
     Route::post('pedidos', 'GuardarOTController')->name('guardar-ot');
 
-    Route::group(["prefix" => "webpay"], function() {
+    Route::group(["prefix" => "webpay"], function () {
         Route::get('init/{ordenTrabajo}', 'TransaccionController@init')->name('webpay.init');
         Route::get('token', 'TransaccionController@token')->name('webpay.token');
 
@@ -50,7 +68,5 @@ Route::group(['middleware' => ['web']], function() {
 
         Route::post('voucher/{ordenTrabajo}', 'TransaccionController@voucher')->name('webpay.voucher');
         Route::post('finish/{ordenTrabajo}', 'TransaccionController@finish')->name('webpay.finish');
-
     });
-
 });

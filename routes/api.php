@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/disponibilidad', 'ReservaController@checkAvailable')->name('revisarDisponibilidad');
 Route::post('/reservar', 'ReservaController@create')->name('hacerReserva');
+
+Route::get("/clientes/lista", "ClienteController@list")->name("clientes.list");
+Route::post("/clientes/json-store", "ClienteController@jsonStore")->name("clientes.json-store");
+

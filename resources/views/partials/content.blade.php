@@ -17,20 +17,15 @@
          </div>
          End Banner -->
 
-    <div class="row">
-        <div class="col-md-4">
-            <img
-                src="{{ asset('img/Lavanderia-LavaTu_RRSS_junio (4).jpg') }}"
-                alt=""
-                class="img-fluid"
-            />
-        </div>
-        <div class="col-md-4">
-            <img src="{{ asset('img/promo_2x1.jpg') }}" class="img-fluid">
-        </div>
-        <div class="col-md-4">
-            <img src="{{ asset('img/promo_cumple.jpg') }}" class="img-fluid">
-        </div>
+    <div class="row justify-content-around">
+        @foreach($promociones as $promocion)
+            <div class="col-md-3">
+                <img
+                    src="{{ asset($promocion->img) }}"
+                    alt="{{ $promocion->nombre . " " . $promocion->descripcion  }}"
+                    class="img-fluid">
+            </div>
+        @endforeach
     </div>
 
     <div class="row">
@@ -44,7 +39,7 @@
                         Tu navegador no soporta videos HTML5.
                     </video>
                     <div class="d-flex flex-column justify-content-center">
-                        <strong class="display-3 mb-5">¿Listo para empezar?</strong>
+                        <strong class="display-3 mb-5">Genera tu pedido</strong>
                         <a class="btn btn-outline-success btn-block mt-5" href="{{ route('crear-ot') }}">Ingresa aquí</a>
                     </div>
                 </div>
