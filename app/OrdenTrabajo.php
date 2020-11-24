@@ -22,9 +22,7 @@ class OrdenTrabajo extends Model
 
     public function getSubtotalPlanchadoAttribute()
     {
-        $planchado = $this->ropas->filter(function($ropa, $index) {
-            return $ropa->pivot->planchado;
-        });
+        $planchado = $this->ropas()->where('planchar', true)->get();
 
         $subtotal = 0;
 
@@ -38,7 +36,7 @@ class OrdenTrabajo extends Model
                 $precio = 500;
             }
 
-            $subtotal += $ropa->cantidad * $precio;
+            $subtotal += $ropa->pivot->cantidad * $precio;
         }
 
         return $subtotal;
