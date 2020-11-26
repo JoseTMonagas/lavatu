@@ -9,8 +9,10 @@
                     <a class="" href="{{ route('home')  }}">Volver</a>
                 </v-card-title>
                 <v-card-text>
-                    <span class="mr-2"><b>Nº Orden: </b>{{ $ordenTrabajo->id  }}</span>
-                    <span><b>Fecha: </b>{{ $ordenTrabajo->created_at  }}</span>
+                    @isset($ordenTrabajo)
+                        <span class="mr-2"><b>Nº Orden: </b>{{ $ordenTrabajo->id  }}</span>
+                    @endisset
+                        <span><b>Fecha: </b>{{ date("d/m/Y")  }}</span>
                 </v-card-text>
                 <v-card-text>
                     Las posibles causas de este rechazo son:
