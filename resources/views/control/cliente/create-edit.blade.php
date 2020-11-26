@@ -34,6 +34,26 @@
                                     </div>
                                 @enderror
                             </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="fecha_nacimiento">Fecha Nacimiento:</label>
+                                <input
+                                    class="form-control
+                                           @error("fecha_nacimiento")
+                                            is-invalid
+                                           @enderror"
+                                    name="fecha_nacimiento"
+                                    type="date"
+                                    @isset($item)
+                                        value="{{ $item->fecha_nacimiento  }}"
+                                    @endisset
+                                />
+                                @error("fecha_nacimiento")
+                                    <div class="alert alert-danger">
+                                        {{ $message  }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="form-row">
@@ -80,6 +100,34 @@
 
                         <div class="form-row">
                             <div class="col-md-6 form-group">
+                                <label for="sector_id">Sector:</label>
+                                <select
+                                    name="sector_id"
+                                    class="form-control
+                                          @error("sector_id")
+                                          is-invalid
+                                          @enderror
+                                          ">
+
+                                    @foreach($sectors as $sector)
+                                        <option
+                                            @if(isset($item) && $item->sector_id == $sector->id)
+                                                selected
+                                            @endif
+                                            value="{{ $sector->id  }}">
+                                            {{ $sector->nombre }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+                                @error("sector_id")
+                                    <div class="alert alert-danger">
+                                        {{ $message  }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 form-group">
                                 <label for="direccion">Direccion:</label>
                                 <input
                                     class="form-control
@@ -93,26 +141,6 @@
                                     @endisset
                                 />
                                 @error("direccion")
-                                    <div class="alert alert-danger">
-                                        {{ $message  }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 form-group">
-                                <label for="fecha_nacimiento">Fecha Nacimiento:</label>
-                                <input
-                                    class="form-control
-                                           @error("fecha_nacimiento")
-                                            is-invalid
-                                           @enderror"
-                                    name="fecha_nacimiento"
-                                    type="date"
-                                    @isset($item)
-                                        value="{{ $item->fecha_nacimiento  }}"
-                                    @endisset
-                                />
-                                @error("fecha_nacimiento")
                                     <div class="alert alert-danger">
                                         {{ $message  }}
                                     </div>

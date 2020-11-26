@@ -85,13 +85,14 @@ class SectorController extends Controller
      * @param  \App\Sector  $sector
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sector $sector)
+    public function edit(Sector $sectore)
     {
         $title = "Sectores";
-        $item = $sector;
-        $submitRoute = route("sectores.update", $sector);
+        $item = $sectore;
+        $submitRoute = route("sectores.update", $sectore);
+        $indexRoute = route("sectores.index");
         return view("control/generic/create-edit")
-            ->with(compact("submitRoute", "title", "item"));
+            ->with(compact("submitRoute", "title", "item", "indexRoute"));
     }
 
     /**
@@ -101,9 +102,9 @@ class SectorController extends Controller
      * @param  \App\Sector  $sector
      * @return \Illuminate\Http\Response
      */
-    public function update(GenericRequest $request, Sector $sector)
+    public function update(GenericRequest $request, Sector $sectore)
     {
-        $sector->update($request->validated());
+        $sectore->update($request->validated());
         return redirect()->route("sectores.index");
     }
 
@@ -113,9 +114,9 @@ class SectorController extends Controller
      * @param  \App\Sector  $sector
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sector $sector)
+    public function destroy(Sector $sectore)
     {
-        $sector->delete();
+        $sectore->delete();
 
         return redirect()->route("sectores.index");
     }

@@ -216,6 +216,16 @@
               />
               <small class="text-muted">Obligatorio</small>
             </div>
+
+            <div class="col-md-6 form-group">
+              <label for="fecha_nacimiento">Fecha Nacimiento:</label>
+              <input
+                class="form-control"
+                v-model="nuevoCliente.fecha_nacimiento"
+                type="date"
+              />
+              <small class="text-muted">Obligatorio</small>
+            </div>
           </div>
 
           <div class="form-row">
@@ -243,21 +253,24 @@
 
           <div class="form-row">
             <div class="col-md-6 form-group">
+              <label for="sector_id">Sector:</label>
+              <v-autocomplete
+                v-model="nuevoCliente.sector_id"
+                :items="sectores"
+                item-text="nombre"
+                item-value="id"
+                dense
+                outlined
+              ></v-autocomplete>
+              <small class="text-muted">Obligatorio</small>
+            </div>
+
+            <div class="col-md-6 form-group">
               <label for="direccion">Direccion:</label>
               <input
                 class="form-control"
                 v-model="nuevoCliente.direccion"
                 type="text"
-              />
-              <small class="text-muted">Obligatorio</small>
-            </div>
-
-            <div class="col-md-6 form-group">
-              <label for="fecha_nacimiento">Fecha Nacimiento:</label>
-              <input
-                class="form-control"
-                v-model="nuevoCliente.fecha_nacimiento"
-                type="date"
               />
               <small class="text-muted">Obligatorio</small>
             </div>
@@ -313,6 +326,10 @@ export default {
       required: true
     },
     formasPago: {
+      type: Array,
+      required: true
+    },
+    sectores: {
       type: Array,
       required: true
     },
@@ -406,6 +423,7 @@ export default {
       email: "",
       telefono: "",
       direccion: "",
+      sector: "",
       nacimiento: "",
       frecuente: "",
 
@@ -415,9 +433,10 @@ export default {
       nuevoCliente: {
         nombre: "",
         telefono: "",
-        email: "",
-        direccion: "",
-        fecha_nacimiento: "",
+        email: "contacto@lavatu.cl",
+        direccion: "Gamboa 594",
+        fecha_nacimiento: Date.now(),
+        sector_id: 1,
         cliente_frecuente: false
       },
       selectedPromocion: null,
@@ -462,6 +481,7 @@ export default {
       const nombre = this.nuevoCliente.nombre;
       const telefono = this.nuevoCliente.telefono;
       const email = this.nuevoCliente.email;
+      const sector_id = this.nuevoCliente.sector_id;
       const direccion = this.nuevoCliente.direccion;
       const fecha_nacimiento = this.nuevoCliente.fecha_nacimiento;
       const cliente_frecuente = this.nuevoCliente.cliente_frecuente;
@@ -473,6 +493,7 @@ export default {
           telefono,
           email,
           direccion,
+          sector_id,
           fecha_nacimiento,
           cliente_frecuente
         })
@@ -508,9 +529,10 @@ export default {
       this.nuevoCliente = {
         nombre: "",
         telefono: "",
-        email: "",
-        direccion: "",
-        fecha_nacimiento: "",
+        email: "contacto@lavatu.cl",
+        direccion: "Gamboa 594",
+        fecha_nacimiento: Date.now(),
+        sector_id: 1,
         cliente_frecuente: false
       };
       this.dlgCliente = false;
@@ -519,6 +541,8 @@ export default {
       const cliente = this.clientes.find(
         cliente => cliente.id == this.selectedCliente
       );
+
+      console.log({ cliente });
       this.nombre = cliente.nombre;
       this.email = cliente.email;
       this.telefono = cliente.telefono;

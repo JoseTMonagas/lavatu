@@ -6,6 +6,7 @@
         venta-store="{{ route("ventas.store")  }}"
         :servicios='@json($servicios)'
         :formas-pago='@json($formasPago)'
+        :sectores='@json($sectores)'
         return-route="{{ route('ventas.index')  }}"
         @isset($venta)
         :edit-item='@json($venta)'

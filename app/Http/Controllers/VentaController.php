@@ -30,9 +30,10 @@ class VentaController extends Controller
     {
         $servicios = \App\TipoServicio::all();
         $formasPago = \App\FormaPago::all();
+        $sectores = \App\Sector::all();
 
         return view("control/venta/create-edit")
-            ->with(compact("servicios", "formasPago"));
+            ->with(compact("servicios", "formasPago", "sectores"));
     }
 
     /**
@@ -80,10 +81,11 @@ class VentaController extends Controller
     {
         $servicios = \App\TipoServicio::all();
         $formasPago = \App\FormaPago::all();
+        $sectores = \App\Sector::all();
         $venta->load("cliente", "formaPago", "tipoServicios");
 
         return view("control/venta/create-edit")
-            ->with(compact("servicios", "formasPago", "venta"));
+            ->with(compact("servicios", "formasPago", "venta", "sectores"));
     }
 
     /**

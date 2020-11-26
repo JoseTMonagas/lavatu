@@ -12,7 +12,7 @@ class Cliente extends Model
     protected $appends = ["editRoute", "deleteRoute", "visitas", "ciclos", "monto"];
     protected $fillable = ["nombre", "telefono", "email",
                            "direccion", "fecha_nacimiento",
-                           "cliente_frecuente"];
+                           "sector_id", "cliente_frecuente"];
 
     public function getEditRouteAttribute()
     {
@@ -27,6 +27,11 @@ class Cliente extends Model
     public function ventas()
     {
         return $this->hasMany("App\Venta");
+    }
+
+    public function sector()
+    {
+        return $this->belongsTo("App\Sector");
     }
 
     public function getVisitasAttribute()

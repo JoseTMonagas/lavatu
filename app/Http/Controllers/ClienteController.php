@@ -27,7 +27,9 @@ class ClienteController extends Controller
     public function create()
     {
         $submitRoute = route("clientes.store");
-        return view("control/cliente/create-edit")->with(compact("submitRoute"));
+        $sectors = \App\Sector::all();
+
+        return view("control/cliente/create-edit")->with(compact("submitRoute", "sectors"));
     }
 
     /**
@@ -55,7 +57,7 @@ class ClienteController extends Controller
         $csv = fopen(storage_path("reporte.csv"), "w");
 
         fputcsv($csv, [
-            "ID", "NOMBRE", "TELEFONO", "EMAIL", "DIRECCION", "FECHA NACIMIENTO",
+            "ID", "NOMBRE", "TELEFONO", "EMAIL", "DIRECCION", "SECTOR", "FECHA NACIMIENTO",
             "CLIENTE FRECUENTE", "FECHA CREACION", "FECHA ACTUALIZACION",
         ]);
 
@@ -63,7 +65,7 @@ class ClienteController extends Controller
             $frecuente = ($cliente->cliente_frecuente) ? "SI" : "NO";
             fputcsv($csv, [
                 $cliente->id, $cliente->nombre, $cliente->telefono,
-                $cliente->email, $cliente->direccion, $cliente->fecha_nacimiento,
+                $cliente->email, $cliente->direccion, $cliente->sector->nombre, $cliente->fecha_nacimiento,
                 $frecuente, $cliente->created_at, $cliente->updated_at,
             ]);
         }
@@ -83,8 +85,10 @@ class ClienteController extends Controller
     {
         $item = $cliente;
         $submitRoute = route("clientes.update", $cliente);
+        $sectors = \App\Sector::all();
+
         return view("control/cliente/create-edit")
-            ->with(compact("item", "submitRoute"));
+            ->with(compact("item", "submitRoute", "sectors"));
     }
 
     /**

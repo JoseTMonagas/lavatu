@@ -29,6 +29,7 @@ class ClienteForm extends FormRequest
             "email" => "required|email:rfc",
             "direccion" => "required",
             "fecha_nacimiento" => "required",
+            "sector_id" => "required|exists:sectors,id",
             "cliente_frecuente" => "sometimes",
         ];
     }
