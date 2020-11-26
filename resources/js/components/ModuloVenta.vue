@@ -7,17 +7,19 @@
       </v-card-title>
       <v-card-text>
         <div class="form-row">
-          <div class="col-md-4">
+          <div class="col-md-2">
             <v-autocomplete
               :items="clientes"
               item-text="nombre"
               item-value="id"
               label="Cliente"
               outlined
-              filled
+              dense
               v-model="selectedCliente"
               @change="fillClienteData"
             ></v-autocomplete>
+          </div>
+          <div class="col-md-1">
             <v-btn
               :loading="loading"
               :disabled="loading"
@@ -28,18 +30,23 @@
             >
           </div>
           <div
-            class="col-md-4 d-flex flex-column"
+            class="col-md-2 offset-md-1 d-flex flex-column"
             v-if="selectedCliente != null"
           >
             <span> <b>Nombre:</b> {{ nombre }} </span>
             <span> <b>Telefono:</b> {{ telefono }} </span>
             <span> <b>Email:</b> {{ email }} </span>
+          </div>
+          <div
+            class="col-md-2 d-flex flex-column"
+            v-if="selectedCliente != null"
+          >
             <span> <b>Direccion:</b> {{ direccion }} </span>
             <span> <b>Fecha de Nacimiento:</b> {{ nacimiento }} </span>
             <span> <b>Cliente Frecuente:</b> {{ frecuente }} </span>
           </div>
           <div
-            class="col-md-4 d-flex flex-column"
+            class="col-md-1 d-flex flex-column"
             v-if="selectedCliente != null"
           >
             <span> <b>Visitas:</b> {{ visitas }} </span>
@@ -49,27 +56,84 @@
         </div>
 
         <div class="form-row align-items-end">
-          <div class="col-md-3">
+          <div class="col-md-2">
             <label for="fecha_ingreso">
               <b>Fecha Ingreso:</b>
             </label>
-            <input
-              class="form-control form-control-lg"
-              v-model="fechaIngreso"
-              type="date"
-            />
+            <input class="form-control" v-model="fechaIngreso" type="date" />
           </div>
-          <div class="col-md-3 offset-md-1">
+          <div class="col-md-2">
             <label for="fecha_venta">
               <b>Fecha Venta:</b>
             </label>
-            <input
-              class="form-control form-control-lg"
-              v-model="fechaVenta"
-              type="date"
-            />
+            <input class="form-control" v-model="fechaVenta" type="date" />
           </div>
-          <div class="col-md-4 offset-md-1">
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-8">
+            <div class="form-row">
+              <div class="col-md-4">
+                <v-autocomplete
+                  :items="servicios"
+                  item-text="nombre"
+                  item-value="id"
+                  outlined
+                  dense
+                  v-model="selectedServicio"
+                  label="Servicio"
+                ></v-autocomplete>
+              </div>
+              <div class="col-md-2 offset-md-1">
+                <v-text-field
+                  v-model="selectedCantidad"
+                  label="Cantidad"
+                  outlined
+                  dense
+                ></v-text-field>
+              </div>
+              <div class="col-md-1 offset-md-1">
+                <v-btn
+                  :loading="loading"
+                  :disabled="loading"
+                  color="primary"
+                  @click="agregarDetalle"
+                  >Agregar Servicio</v-btn
+                >
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-12">
+                <v-simple-table fixed-header height="150" dense>
+                  <template v-slot:default>
+                    <thead>
+                      <tr>
+                        <th class="text-left">Tipo de Servicio</th>
+                        <th class="text-left">Precio Unitario</th>
+                        <th class="text-left">Cantidad</th>
+                        <th class="text-left">Valor</th>
+                        <th class="text-left">Eliminar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(detalle, index) in detalles" :key="index">
+                        <td>{{ detalle.tipoServicio.nombre }}</td>
+                        <td>{{ detalle.tipoServicio.precio }}</td>
+                        <td>{{ detalle.cantidad }}</td>
+                        <td>{{ detalle.valor }}</td>
+                        <td>
+                          <v-btn @click="eliminarDetalle(index)"
+                            >Eliminar</v-btn
+                          >
+                        </td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex flex-column">
             <v-btn
               :loading="loading"
               :disabled="loading"
@@ -77,67 +141,6 @@
               @click="save"
               >Guardar Venta</v-btn
             >
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col-md-3">
-            <v-autocomplete
-              :items="servicios"
-              item-text="nombre"
-              item-value="id"
-              outlined
-              filled
-              v-model="selectedServicio"
-              label="Servicio"
-            ></v-autocomplete>
-          </div>
-          <div class="col-md-3 offset-md-1">
-            <v-text-field
-              v-model="selectedCantidad"
-              label="Cantidad"
-              outlined
-              filled
-            ></v-text-field>
-          </div>
-          <div class="col-md-2 offset-md-1">
-            <v-btn
-              :loading="loading"
-              :disabled="loading"
-              color="primary"
-              @click="agregarDetalle"
-              >Agregar Servicio</v-btn
-            >
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="col-md-8">
-            <v-simple-table>
-              <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th class="text-left">Tipo de Servicio</th>
-                    <th class="text-left">Precio Unitario</th>
-                    <th class="text-left">Cantidad</th>
-                    <th class="text-left">Valor</th>
-                    <th class="text-left">Eliminar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(detalle, index) in detalles" :key="index">
-                    <td>{{ detalle.tipoServicio.nombre }}</td>
-                    <td>{{ detalle.tipoServicio.precio }}</td>
-                    <td>{{ detalle.cantidad }}</td>
-                    <td>{{ detalle.valor }}</td>
-                    <td>
-                      <v-btn @click="eliminarDetalle(index)">Eliminar</v-btn>
-                    </td>
-                  </tr>
-                </tbody>
-              </template>
-            </v-simple-table>
-          </div>
-          <div class="col-md-4 d-flex flex-column">
             <span class="display-1">
               <b>Valor Total:</b>
               {{ subtotal }}
@@ -150,54 +153,50 @@
               <b>Precio Final:</b>
               {{ total }}
             </span>
-
-            <hr />
-
-            <span>
-              <b>Promocion:</b>
-              <v-select
-                :items="[
-                  { text: 'Sin Descuento', value: 'NONE' },
-                  { text: 'Descuento Porcentual', value: 'PERCENT' },
-                  { text: 'Descuento por Valor Fijo', value: 'FIXED' }
-                ]"
-                v-model="selectedPromocion"
-                outlined
-                filled
-              ></v-select>
-              <v-text-field
-                v-model="valuePromocion"
-                outlined
-                filled
-                label="Valor Promocion"
-              ></v-text-field>
-            </span>
-
-            <hr />
-
-            <span>
-              <b>Forma de Pago:</b>
-              <v-autocomplete
-                :items="formasPago"
-                item-text="nombre"
-                item-value="id"
-                v-model="selectedFormaPago"
-                outlined
-                filled
-              ></v-autocomplete>
-            </span>
-            <span>
-              <b>Folio:</b>
-              <v-text-field outlined filled v-model="folio"></v-text-field>
-            </span>
-            <span>
-              <b>Observaciones:</b>
-              <v-text-field
-                outlined
-                filled
-                v-model="observaciones"
-              ></v-text-field>
-            </span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-3">
+            <b>Promocion:</b>
+            <v-select
+              :items="[
+                { text: 'Sin Descuento', value: 'NONE' },
+                { text: 'Descuento Porcentual', value: 'PERCENT' },
+                { text: 'Descuento por Valor Fijo', value: 'FIXED' }
+              ]"
+              v-model="selectedPromocion"
+              outlined
+              dense
+            ></v-select>
+          </div>
+          <div class="col-md-3">
+            <b>Valor Promocion:</b>
+            <v-text-field
+              v-model="valuePromocion"
+              outlined
+              dense
+            ></v-text-field>
+          </div>
+          <div class="col-md-3">
+            <b>Forma de Pago:</b>
+            <v-autocomplete
+              :items="formasPago"
+              item-text="nombre"
+              item-value="id"
+              v-model="selectedFormaPago"
+              outlined
+              dense
+            ></v-autocomplete>
+          </div>
+          <div class="col-md-3">
+            <b>Folio:</b>
+            <v-text-field outlined dense v-model="folio"></v-text-field>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md">
+            <b>Observaciones:</b>
+            <v-text-field outlined dense v-model="observaciones"></v-text-field>
           </div>
         </div>
       </v-card-text>
@@ -442,7 +441,7 @@ export default {
       selectedPromocion: null,
       valuePromocion: null,
       selectedFormaPago: null,
-      folio: ""
+      folio: null
     };
   },
   created() {
@@ -585,6 +584,23 @@ export default {
       const forma_pago_id = this.selectedFormaPago;
       const folio = this.folio;
       const observaciones = this.observaciones;
+
+      let validator = 0;
+      if (fecha_venta != null) {
+        validator += 1;
+      }
+      if (folio != null) {
+        validator += 1;
+      }
+      if (forma_pago_id != null) {
+        validator += 1;
+      }
+
+      if (validator > 0 && validator < 3) {
+        alert("Revisar campos de fecha de venta, folio, y forma de pago");
+        return;
+      }
+
       let route = "";
       this.loading = true;
       if (this.ventaUpdate != null && this.editItem != null) {
