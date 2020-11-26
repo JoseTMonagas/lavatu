@@ -24,6 +24,13 @@
                     x-large
                     depressed
                     class="my-2"
+                    href="{{route('sectores.index')}}">
+                    Sectores
+                </v-btn>
+                <v-btn
+                    x-large
+                    depressed
+                    class="my-2"
                     href="{{route('forma-pagos.index')}}">
                     Formas de Pago
                 </v-btn>

@@ -43,6 +43,7 @@ Route::group(['middleware' => ['web']], function () {
             "promocions" => "PromocionController",
             "precios" => "PrecioController",
             "ventas" => "VentaController",
+            "sectores" => "SectorController",
         ]);
 
         Route::get('ot/index', 'OrdenTrabajoController@index')->name('ot.index');
