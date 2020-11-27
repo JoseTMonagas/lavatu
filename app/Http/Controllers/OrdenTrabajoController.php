@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrdenTrabajoEditForm;
 use App\OrdenTrabajo;
 use Illuminate\Http\Request;
 
@@ -56,7 +57,6 @@ class OrdenTrabajoController extends Controller
      */
     public function show(OrdenTrabajo $ordenTrabajo)
     {
-        //
     }
 
     /**
@@ -79,9 +79,12 @@ class OrdenTrabajoController extends Controller
      * @param  \App\OrdenTrabajo  $ordenTrabajo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrdenTrabajo $ordenTrabajo)
+    public function update(OrdenTrabajoEditForm $request, $ordenTrabajo)
     {
-        //
+        $ordenTrabajo = OrdenTrabajo::find($ordenTrabajo);
+        $ordenTrabajo->update($request->validated());
+
+        return response()->json($ordenTrabajo);
     }
 
     /**

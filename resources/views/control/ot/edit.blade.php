@@ -1,15 +1,15 @@
 @extends('layouts.app')
 @section('content')
     <div class="container-fluid">
-        <div class="col-md-8 mx-auto">
+        <div class="col-md-12 mx-auto">
             <v-card>
                 <v-card-title class="d-flex justify-content-between">
                     <span>Ordenes de Trabajo</span>
-                    <a href="{{ route('ordenes.index')  }}">Volver</a>
+                    <a href="{{ route('mantenimiento.home')  }}">Volver</a>
                 </v-card-title>
-                <control-ot
-                    get-route="{{ route('ot.getOT') }}"
-                ></control-ot>
+                <editar-ot
+                    route="{{ route("ordenes.update", $ordenTrabajo) }}"
+                    :orden-trabajo='@json($ordenTrabajo)'></editar-ot>
             </v-card>
         </div>
     </div>

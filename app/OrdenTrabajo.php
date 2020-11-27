@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class OrdenTrabajo extends Model
 {
     use SoftDeletes;
-    protected $fillable = ["cargas"];
+    protected $fillable = ["cargas", "planchas", "descuento", "observacion"];
+    protected $appends = ["editRoute", "deleteRoute", "total",
+                          "subtotalPlanchado", "subtotalCargas"];
 
     public function user()
     {
@@ -20,27 +22,19 @@ class OrdenTrabajo extends Model
         return $this->belongsToMany('App\Ropa')->withPivot(["cantidad"]);
     }
 
+    public function getEditRouteAttribute()
+    {
+        return route("ordenes.edit", $this);
+    }
+
+    public function getDeleteRouteAttribute()
+    {
+        return route("ordenes.destroy", $this);
+    }
+
     public function getSubtotalPlanchadoAttribute()
     {
-        $planchado = $this->ropas()->where('planchar', true)->get();
-
-        $subtotal = 0;
-
-        foreach($planchado as $ropa) {
-            $precio = 0;
-            if ($ropa->precio_planchado > 0) {
-                $precio = $ropa->precio_planchado;
-            } else if ($ropa->pivot->cantidad < 5) {
-                $precio = 700;
-            } else {
-                $precio = 500;
-            }
-
-            $subtotal += $ropa->pivot->cantidad * $precio;
-        }
-
-        return $subtotal;
-
+        return $this->planchas * ($this->planchas > 5 ? 500 : 700);
     }
 
     public function getSubtotalCargasAttribute()

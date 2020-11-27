@@ -31,6 +31,7 @@ Vue.component(
   require("./components/OrdenTrabajo.vue").default
 );
 Vue.component("control-ot", require("./components/ControlOT.vue").default);
+Vue.component("editar-ot", require("./components/EditarOT.vue").default);
 Vue.component("modulo-venta", require("./components/ModuloVenta.vue").default);
 
 /**
