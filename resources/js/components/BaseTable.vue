@@ -47,6 +47,11 @@
         </td>
       </template>
       <template v-slot:item.actions="{ item }">
+        <a v-if="item.showRoute != undefined" :href="item.showRoute">
+          <v-icon small class="mr-2">
+            mdi-eye
+          </v-icon>
+        </a>
         <a :href="item.editRoute">
           <v-icon small class="mr-2">
             mdi-pencil
