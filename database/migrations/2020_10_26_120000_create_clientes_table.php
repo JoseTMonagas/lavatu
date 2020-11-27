@@ -19,6 +19,7 @@ class CreateClientesTable extends Migration
             $table->string("telefono");
             $table->string("email");
             $table->string("direccion");
+            $table->foreignId('sector_id')->constrained('sectors');
             $table->string("fecha_nacimiento");
             $table->boolean("cliente_frecuente")->default(false);
             $table->softDeletes();
