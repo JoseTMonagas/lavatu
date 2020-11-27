@@ -65,7 +65,7 @@
                     x-large
                     depressed
                     class="my-2"
-                    href="{{route('ot.index')}}">
+                    href="{{route('ordenes.index')}}">
                     Ordenes de Trabajo
                 </v-btn>
                 <v-divider></v-divider>

@@ -44,11 +44,10 @@ Route::group(['middleware' => ['web']], function () {
             "precios" => "PrecioController",
             "ventas" => "VentaController",
             "sectores" => "SectorController",
+            "ordenes" => "OrdenTrabajoController",
         ]);
 
-        Route::get('ot/index', 'OrdenTrabajoController@index')->name('ot.index');
         Route::get('ot/list', 'OrdenTrabajoController@list')->name('ot.getOT');
-        Route::post('ot/state', 'OrdenTrabajoController@updateState')->name('ot.stateUpdate');
     });
 
 
