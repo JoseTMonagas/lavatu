@@ -40,7 +40,7 @@ class Ropa extends Model
 
     public function ordenes()
     {
-        return $this->belongsToMany('App\OrdenTrabajo')->withPivot(["cantidad"]);
+        return $this->belongsToMany('App\OrdenTrabajo')->withPivot(["cantidad", "planchar"]);
     }
 
 }

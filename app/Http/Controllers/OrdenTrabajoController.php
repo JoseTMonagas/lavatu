@@ -143,8 +143,9 @@ class OrdenTrabajoController extends Controller
     public function edit($ordenTrabajo)
     {
         $ordenTrabajo = OrdenTrabajo::find($ordenTrabajo);
-        $ordenTrabajo->load("user");
-        return view("control/ot/edit")->with(compact("ordenTrabajo"));
+        $ordenTrabajo->load("user", "ropas");
+        $ropas = \App\Ropa::all();
+        return view("control/ot/edit")->with(compact("ordenTrabajo", "ropas"));
     }
 
     /**
@@ -156,8 +157,18 @@ class OrdenTrabajoController extends Controller
      */
     public function update(OrdenTrabajoEditForm $request, $ordenTrabajo)
     {
+        $form = $request->validated();
         $ordenTrabajo = OrdenTrabajo::find($ordenTrabajo);
-        $ordenTrabajo->update($request->validated());
+        $ordenTrabajo->update($form);
+
+        $ropas = collect($form["ropas"])->mapWithKeys(function ($detalle) {
+            return [$detalle["ropa_id"] => [
+                "cantidad" => $detalle["cantidad"],
+                "planchar" => $detalle["planchar"],
+            ]];
+        });
+
+        $ordenTrabajo->ropas()->sync($ropas);
 
         return response()->json($ordenTrabajo);
     }

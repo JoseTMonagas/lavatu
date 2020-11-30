@@ -125,15 +125,82 @@
         </span>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-8 mx-auto">
+    <div class="row border-top">
+      <div class="col-md-4 border-right">
         <b>Observacion:</b>
-        <v-text-field
+        <v-textarea
           outlined
           dense
+          auto-grow
           :readonly="!isEditing"
           v-model="editOrden.observacion"
-        ></v-text-field>
+        ></v-textarea>
+      </div>
+      <div class="col-md">
+        <div
+          v-if="isEditing"
+          class="form-row align-items-baseline justify-content-center"
+        >
+          <v-autocomplete
+            class="col-md-3"
+            outlined
+            dense
+            label="Ropa"
+            :items="ropas"
+            item-text="name"
+            item-value="id"
+            v-model="newItem.ropa_id"
+          ></v-autocomplete>
+          <v-text-field
+            class="col-md-3"
+            outlined
+            dense
+            label="Cantidad"
+            v-model="newItem.cantidad"
+          ></v-text-field>
+          <v-checkbox
+            v-model="newItem.planchar"
+            class="col-md-2"
+            label="Planchado"
+          ></v-checkbox>
+          <v-btn class="col-md-1" @click="agregarItem">Agregar</v-btn>
+        </div>
+        <v-simple-table fixed-header height="300">
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th>
+                  <b>Item</b>
+                </th>
+                <th>
+                  <b>Cantidad</b>
+                </th>
+                <th>
+                  <b>Planchado</b>
+                </th>
+                <th v-if="isEditing">
+                  <b>Eliminar</b>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(ropa, index) in editOrden.ropas" :key="index">
+                <td>{{ getRopaNombreById(ropa.ropa_id) }}</td>
+                <td>{{ ropa.cantidad }}</td>
+                <td>{{ ropa.planchar ? "Si" : "No" }}</td>
+                <td v-if="isEditing">
+                  <v-btn
+                    depressed
+                    color="error"
+                    @click="eliminarItem(ropa.ropa_id)"
+                  >
+                    Borrar
+                  </v-btn>
+                </td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
       </div>
     </div>
   </div>
@@ -143,6 +210,10 @@ export default {
   props: {
     ordenTrabajo: {
       type: Object,
+      required: true
+    },
+    ropas: {
+      type: Array,
       required: true
     },
     route: {
@@ -242,7 +313,13 @@ export default {
         planchas: null,
         tipoDescuento: "NONE",
         valorDescuento: null,
-        observacion: null
+        observacion: null,
+        ropas: []
+      },
+      newItem: {
+        ropa_id: null,
+        cantidad: null,
+        planchar: false
       }
     };
   },
@@ -250,7 +327,18 @@ export default {
     this.editOrden.estado = this.ordenTrabajo.state;
     this.editOrden.cargas = this.ordenTrabajo.cargas;
     this.editOrden.planchas = this.ordenTrabajo.planchas;
-    this.editOrden.observacione = this.ordenTrabajo.observacion;
+    this.editOrden.observacion = this.ordenTrabajo.observacion;
+    for (const index in this.ordenTrabajo.ropas) {
+      const ropa = this.ordenTrabajo.ropas[index];
+      const ropa_id = ropa.id;
+      const cantidad = ropa.pivot.cantidad;
+      const planchar = ropa.pivot.planchar;
+      this.editOrden.ropas.push({
+        ropa_id,
+        cantidad,
+        planchar
+      });
+    }
   },
   methods: {
     save() {
@@ -258,12 +346,14 @@ export default {
       const cargas = this.editOrden.cargas;
       const planchas = this.editOrden.planchas;
       const observacion = this.editOrden.observacion;
+      const ropas = this.editOrden.ropas;
       axios
         .put(this.route, {
           state,
           cargas,
           planchas,
-          observacion
+          observacion,
+          ropas
         })
         .catch(function(error) {
           if (error.response) {
@@ -288,6 +378,38 @@ export default {
             alert("Guardado");
           }
         });
+    },
+    getRopaNombreById(ropaId) {
+      const found = this.ropas.find(ropa => ropa.id == ropaId);
+
+      if (found) {
+        return found.name;
+      }
+
+      console.error(found);
+      return "";
+    },
+    agregarItem() {
+      if (this.newItem.ropa_id == null || this.newItem.cantidad <= 0) return;
+      if (
+        this.editOrden.ropas.some(ropa => ropa.ropa_id == this.newItem.ropa_id)
+      )
+        return;
+
+      this.editOrden.ropas.push(this.newItem);
+      this.newItem = {
+        ropa_id: null,
+        cantidad: 0,
+        planchar: false
+      };
+    },
+    eliminarItem(ropaId) {
+      const index = this.editOrden.ropas.findIndex(
+        ropa => ropa.ropa_id == ropaId
+      );
+      if (index >= 0) {
+        this.editOrden.ropas.splice(index, 1);
+      }
     }
   }
 };

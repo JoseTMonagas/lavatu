@@ -19,7 +19,7 @@ class OrdenTrabajo extends Model
 
     public function ropas()
     {
-        return $this->belongsToMany('App\Ropa')->withPivot(["cantidad"]);
+        return $this->belongsToMany('App\Ropa')->withPivot(["cantidad", "planchar"]);
     }
 
     public function getEditRouteAttribute()

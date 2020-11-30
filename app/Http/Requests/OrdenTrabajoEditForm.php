@@ -27,6 +27,11 @@ class OrdenTrabajoEditForm extends FormRequest
             'state' => 'required|alpha',
             'cargas' => 'required|integer',
             'planchas' => 'required|integer',
+            'observacion' => 'sometimes',
+            'ropas' => 'required|array|min:1',
+            'ropas.*.ropa_id' => 'required|exists:ropas,id',
+            'ropas.*.cantidad' => 'required|integer',
+            'ropas.*.planchar' => 'required|boolean',
         ];
     }
 }
