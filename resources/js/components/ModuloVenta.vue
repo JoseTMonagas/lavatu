@@ -676,6 +676,25 @@ export default {
           .then(resp => {
             if (resp.data == "OK") {
               alert("Guardado Exitosamente");
+              this.selectedCliente = null;
+              this.fechaIngreso = null;
+              this.fechaVenta = null;
+              this.selectedServicio = null;
+              this.selectedCantidad = null;
+              this.nombre = "";
+              this.email = "";
+              this.telefono = "";
+              this.direccion = "";
+              this.sector = "";
+              this.nacimiento = "";
+              this.frecuente = "";
+              this.dlgCliente = false;
+              this.detalles = [];
+              this.observaciones = "";
+              this.selectedPromocion = null;
+              this.valuePromocion = null;
+              this.selectedFormaPago = null;
+              this.folio = null;
             } else {
               alert(
                 "No se pudo guardar, revise la informacion ingresada, e intente nuevamente"
