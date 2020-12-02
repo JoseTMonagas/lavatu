@@ -120,7 +120,7 @@
                                 @enderror
                                 @isset($promocion)
                                 <img
-                                    src="{{ asset($promocion->img) }}"
+                                    src="{{ route("promocion.img", $promocion) }}"
                                     class="img-fluid"/>
                                 @endisset
                             </div>

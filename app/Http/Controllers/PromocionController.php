@@ -44,8 +44,9 @@ class PromocionController extends Controller
     public function store(PromocionForm $request)
     {
         $form = $request->validated();
-        $path = $request->img->store("img/promociones", "real_public");
-        $form["img"] = $path;
+        $file = $request->file("img");
+        $contents = $file->openFile()->fread($file->getSize());
+        $form["img"] = $contents;
 
         $promocion = Promocion::create($form);
         $promocion->diasSemana()->attach($form["dia_semana_id"]);
@@ -82,6 +83,15 @@ class PromocionController extends Controller
             ->deleteFileAfterSend();
     }
 
+    public function showImg($promocion)
+    {
+        $promocion = Promocion::find($promocion);
+
+        return response()->make($promocion->img, 200, [
+            "Content-Type" => (new \finfo(FILEINFO_MIME))->buffer($promocion->img)
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -108,7 +118,9 @@ class PromocionController extends Controller
     {
         $form = $request->validated();
         if ($request->hasFile("img")) {
-            $form["img"] = $request->img->store("img/promociones", "real_public");
+            $file = $request->file("img");
+            $contents = $file->openFile()->fread($file->getSize());
+            $form["img"] = $contents;
         } else {
             $form["img"] = $promocion->img;
         }

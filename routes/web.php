@@ -28,6 +28,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::post("ventas/export", "VentaController@export")
         ->name("ventas.export");
 
+    Route::get("promocion/{id}", "PromocionController@showImg")
+        ->name("promocion.img");
+
     Route::group([
         'middleware' => ['auth', 'isAllowed'],
         'prefix' => 'mantenimiento',

@@ -13,7 +13,12 @@ class Promocion extends Model
         "nombre", "descripcion", "img",
         "inicio", "fin"
     ];
+
     protected $appends = ["editRoute", "deleteRoute"];
+
+    protected $hidden = [
+        'img'
+    ];
 
     public static function getPromocionesDia()
     {

@@ -21,7 +21,7 @@
         @foreach($promociones as $promocion)
             <div class="col-md-3">
                 <img
-                    src="{{ asset($promocion->img) }}"
+                    src="{{ route("promocion.img", $promocion) }}"
                     alt="{{ $promocion->nombre . " " . $promocion->descripcion  }}"
                     class="img-fluid">
             </div>
