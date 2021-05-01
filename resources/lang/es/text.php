@@ -14,5 +14,5 @@ return [
     '4' => 'Nadie cuida tus prendas como tú. Lávala como a ti te gusta',
     '5' => 'Lava por volumen y si quieres, usa tu propio detergente.',
     '6' => 'Contáctanos para conocer nuestras ofertas y servicios.',
-    'direccion-2' => 'Horario de atención: <br/> Lunes a viernes de 8:30 a 20:00 h, <br/> Sábado de 9:00 a 16:30 h.',
+    'direccion-2' => 'Horario de atención: <br/> Lunes a viernes de 8:30 a 13:00 h y de 15:00 a 20:00h, <br/> Sábado de 9:00 a 13:00 h y de 15:00 a 16:30 h.',
 ];

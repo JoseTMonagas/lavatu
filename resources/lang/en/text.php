@@ -14,5 +14,5 @@ return [
     '4' => 'Noone takes care of your clothes better than you. Wash it however you like.',
     '5' => 'Wash by volume and if you want, use your own detergent.',
     '6' => 'Contact us to know more about our offers and services.',
-    'direccion-2' => 'Attention Hours: Monday to Friday from 8:30 am to 8:00 pm; Saturdays from 9:00 am to 4:30 pm.',
+    'direccion-2' => 'Attention Hours: Monday to Friday from 8:30 am to 1:00 pm and from 3:00 pm to 8:00 pm; Saturdays from 9:00 am to 1:00pm and from 3:00 to 4:30 pm.',
 ];
